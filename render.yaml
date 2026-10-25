@@ -1,0 +1,53 @@
+# Render Blueprint — سحاب العقارية (SAHAB WhatsApp engine)
+# الاستخدام: Render ← New ← Blueprint ← اختر الريبو. ستطلب Render قيم الأسرار (sync:false) عند الإنشاء.
+services:
+  - type: web
+    name: sahab-wa-engine
+    runtime: node
+    plan: free
+    region: frankfurt          # الأقرب لمصر
+    branch: main
+    autoDeployTrigger: commit  # نشر تلقائي مع كل push
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # ---- وضع الإرسال: ابدأ true، وحوّله false بعد ضبط Meta ----
+      - key: DRY_RUN
+        value: "true"
+      # ---- أسرار: تُدخل من لوحة Render ولا تُكتب هنا أبداً ----
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: META_VERIFY_TOKEN
+        sync: false
+      - key: META_APP_SECRET
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
+      - key: META_PHONE_NUMBER_ID
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # ---- إعدادات عامة ----
+      - key: META_API_VERSION
+        value: v23.0
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-5-5
+      - key: COMPANY_NAME
+        value: سحاب العقارية
+      - key: COMPANY_WHATSAPP
+        value: "201055523412"
+      - key: REROUTE_ON_BREAK
+        value: "false"
+      - key: OUTBOUND_APPROVAL
+        value: templates
+      - key: AGENT_APPROVAL
+        value: "on"
+      - key: AGENT_VERIFY_TEMPLATE
+        value: sahab_agent_verify

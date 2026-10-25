@@ -1,0 +1,29 @@
+{
+  "name": "sahab-wa-engine",
+  "version": "1.0.0",
+  "description": "\u0633\u062d\u0627\u0628 \u0627\u0644\u0639\u0642\u0627\u0631\u064a\u0629 (SAHAB) \u2014 WhatsApp Cloud API engine: webhook, AI qualification, round-robin routing, agent APIs",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "simulate": "node scripts/simulate-inbound.js",
+    "check": "node scripts/check-env.js",
+    "setup:db": "node scripts/setup-db.js",
+    "setup:admin": "node scripts/bootstrap-admin.js",
+    "setup": "node scripts/setup-db.js && node scripts/bootstrap-admin.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^8.0.0",
+    "zod": "^3.23.8",
+    "pg": "^8.13.0"
+  }
+}

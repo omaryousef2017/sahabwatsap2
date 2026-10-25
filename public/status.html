@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>سحاب العقارية (SAHAB) — محرك رسائل الواتساب</title>
+<style>
+  :root{
+    --ink:#140b24; --ink-2:#1d1233; --line:rgba(255,255,255,.12);
+    --text:#f6f2ff; --muted:#b4a9cc;
+    --violet:#6a2fd8; --red:#e8302a; --orange:#ff6a1f;
+    --ok:#4ade80; --bad:#ff5a5a;
+  }
+  *{box-sizing:border-box;margin:0}
+  html,body{height:100%}
+  body{
+    background:var(--ink); color:var(--text);
+    font-family:"Segoe UI","Noto Naskh Arabic",Tahoma,system-ui,sans-serif;
+    line-height:1.7; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    min-height:100vh;
+  }
+  /* اللوحة البصرية: خلفية الهوية بالنقاط + الشعار */
+  .brand{
+    position:relative; display:grid; place-items:center; padding:48px; overflow:hidden;
+    background:var(--violet) url("assets/pattern.jpg") center/cover no-repeat;
+  }
+  .brand::after{ /* عمق خفيف يحافظ على وضوح الشعار */
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(120% 90% at 50% 50%, transparent 40%, rgba(20,11,36,.45));
+    pointer-events:none;
+  }
+  .logo{
+    position:relative; z-index:1; width:min(520px,80%); height:auto; display:block;
+    mix-blend-mode:screen;               /* الأسود يختفي ويبقى الأبيض فقط فوق التدرج */
+    filter:drop-shadow(0 6px 28px rgba(20,11,36,.35));
+  }
+  /* لوحة الحالة */
+  .status{ display:flex; flex-direction:column; justify-content:center; gap:36px; padding:56px clamp(24px,6vw,72px); }
+  h1{ font-size:clamp(1.7rem,3.2vw,2.5rem); font-weight:800; line-height:1.35; max-width:16ch; }
+  .lead{ color:var(--muted); max-width:38ch; margin-top:12px; }
+  .checks{ list-style:none; padding:0; display:grid; gap:0; border-top:1px solid var(--line); }
+  .checks li{ display:flex; align-items:center; gap:14px; padding:18px 0; border-bottom:1px solid var(--line); }
+  .dot{ width:12px; height:12px; border-radius:50%; background:var(--muted); flex:none; }
+  .ok .dot{ background:var(--ok); box-shadow:0 0 0 0 rgba(74,222,128,.55); animation:pulse 2.2s ease-out infinite; }
+  .bad .dot{ background:var(--bad); }
+  .label{ flex:1; font-weight:600; }
+  .val{ color:var(--muted); font-size:.92rem; font-variant-numeric:tabular-nums; }
+  .foot{ color:var(--muted); font-size:.85rem; }
+  @keyframes pulse{ 70%{box-shadow:0 0 0 12px rgba(74,222,128,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,128,0)} }
+  @media (prefers-reduced-motion:reduce){ .ok .dot{animation:none} }
+  :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; }
+  @media (max-width:820px){
+    body{ grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    .brand{ min-height:240px; padding:32px; }
+    .status{ padding:32px 24px 48px; }
+  }
+</style>
+</head>
+<body>
+  <section class="brand" aria-label="سحاب العقارية (SAHAB)">
+    <img class="logo" src="assets/logo-sahab.png" alt="سحاب العقارية (SAHAB)">
+  </section>
+
+  <main class="status">
+    <div>
+      <h1>رسائل العملاء تصل للموظف المناسب في ثوانٍ</h1>
+      <p class="lead">محرك الواتساب الموحّد لرقم الشركة: استقبال، تأهيل، توزيع عادل على الأقسام، ومتابعة من التطبيق والداشبورد.</p>
+    </div>
+
+    <ul class="checks" id="checks" aria-live="polite">
+      <li id="c-server"><span class="dot"></span><span class="label">الخادم</span><span class="val">جارٍ الفحص…</span></li>
+      <li id="c-db"><span class="dot"></span><span class="label">قاعدة البيانات</span><span class="val">جارٍ الفحص…</span></li>
+      <li id="c-mode"><span class="dot"></span><span class="label">وضع الإرسال</span><span class="val">…</span></li>
+    </ul>
+
+    <p class="foot" id="foot">آخر فحص: —</p>
+  </main>
+
+<script>
+  const set = (id, ok, text) => {
+    const li = document.getElementById(id);
+    li.className = ok ? 'ok' : 'bad';
+    li.querySelector('.val').textContent = text;
+  };
+  async function check() {
+    try {
+      const r = await fetch('/health', { cache: 'no-store' });
+      const h = await r.json();
+      set('c-server', true, 'يعمل');
+      set('c-db', h.db, h.db ? `متصلة · ${h.latency_ms}ms` : 'غير متصلة');
+      set('c-mode', true, h.dry_run ? 'تجريبي (لا يُرسل فعلياً)' : 'فعلي عبر Meta');
+    } catch {
+      set('c-server', false, 'لا يستجيب'); set('c-db', false, '—'); set('c-mode', false, '—');
+    }
+    document.getElementById('foot').textContent = 'آخر فحص: ' + new Date().toLocaleTimeString('ar-EG');
+  }
+  check(); setInterval(check, 15000);
+</script>
+</body>
+</html>

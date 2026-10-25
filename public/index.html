@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>سحاب العقارية — المحادثات الموحدة</title><link rel="icon" href="assets/favicon.png">
+<style>
+:root{--ink:#0d1016;--i2:#151a23;--i3:#1f2633;--ln:rgba(255,255,255,.09);--tx:#f3f5f9;--mu:#9aa6b8;--rd:#c4313a;--rd2:#9d2024;--sl:#8fa8c0;--ok:#4ade80;--bad:#ff7b7b;--wn:#f5a524;--g:linear-gradient(120deg,#9d2024,#c4313a 70%,#d9553f)}
+*{box-sizing:border-box;margin:0}html,body{height:100%}[hidden]{display:none!important}
+body{background:var(--ink);color:var(--tx);font:15px/1.6 "Segoe UI","Noto Naskh Arabic",Tahoma,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{background:var(--i2);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;width:100%}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--sl);outline-offset:1px}
+.btn{background:var(--g);border:0;border-radius:10px;padding:10px 18px;font-weight:700;cursor:pointer;color:#fff}
+.btn.s{background:var(--i3);font-weight:600}.btn.d{background:#4a1c22}.btn.sm{padding:5px 11px;font-size:13px}.btn:disabled{opacity:.5}
+.login{display:grid;grid-template-columns:1.1fr 1fr;min-height:100vh}
+.brand{display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,#3a1418,#14090c 70%);padding:40px}
+.logo-card{background:#fff;border-radius:22px;padding:26px;width:min(320px,80%);box-shadow:0 20px 60px #0008}.logo-card img{width:100%;display:block}
+.login main{display:grid;place-items:center;padding:32px}.login form{width:min(380px,100%);display:grid;gap:14px}
+h1{font-size:1.6rem}label{display:grid;gap:5px;color:var(--mu);font-size:13px}.chk{display:flex;gap:8px;align-items:center}.chk input{width:auto}
+.pw{position:relative;display:block}.pw input{padding-inline-end:44px}.eye{position:absolute;inset-block:0;inset-inline-end:0;width:44px;display:grid;place-items:center;background:none;border:0;padding:0;color:var(--mu);cursor:pointer;border-radius:10px}.eye:hover{color:#fff}.eye svg[hidden]{display:none}
+.err{color:var(--bad);min-height:1.4em;font-size:14px}.mu{color:var(--mu)}
+.app{display:grid;grid-template-columns:230px 1fr;height:100vh}
+nav{background:var(--i2);border-inline-end:1px solid var(--ln);padding:16px 12px;display:flex;flex-direction:column;gap:6px}
+.nl{background:#fff;border-radius:14px;padding:10px;margin-bottom:12px}.nl img{width:100%;max-height:110px;object-fit:contain;display:block}
+nav>button{background:0;border:0;text-align:start;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--mu);display:flex;justify-content:space-between}
+nav>button.on{background:var(--i3);color:var(--tx);box-shadow:inset -3px 0 0 var(--rd)}
+.bdg{background:var(--rd);color:#fff;border-radius:99px;padding:0 8px;font-size:12px}
+.me{margin-top:auto;border-top:1px solid var(--ln);padding:12px 8px 0;font-size:13px}.wa{display:block;margin:10px 0 0;color:var(--sl);font-size:12px}
+section.v{overflow:auto;padding:22px;min-width:0}
+.chats{display:grid;grid-template-columns:330px 1fr 280px;height:100%;padding:0}
+.lst{border-inline-end:1px solid var(--ln);display:flex;flex-direction:column;min-height:0}
+.flt{padding:12px;display:grid;gap:8px;border-bottom:1px solid var(--ln)}.flt .r{display:flex;gap:6px;flex-wrap:wrap}
+.pill{background:var(--i2);border:1px solid var(--ln);border-radius:99px;padding:2px 11px;font-size:12px;cursor:pointer;color:var(--mu)}.pill.on{background:var(--i3);color:var(--tx);border-color:var(--sl)}
+.items{overflow:auto;flex:1}
+.it{padding:12px 14px;border-bottom:1px solid var(--ln);cursor:pointer;display:grid;gap:4px}.it:hover,.it.on{background:var(--i2)}
+.it b{display:flex;justify-content:space-between;gap:8px;align-items:center}.it small{color:var(--mu)}
+.ch{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;font:700 10px/1 sans-serif;color:#fff;font-style:normal;flex:none}
+.ch.whatsapp{background:#1fa855}.ch.telegram{background:#2a9fd6}.ch.instagram{background:#d62976}.ch.messenger{background:#0a7cff}
+.tag{display:inline-block;background:var(--i3);border-radius:6px;padding:0 7px;font-size:12px;margin-inline-end:4px}.tag.w{background:var(--wn);color:#1c1200}.tag.ai{background:#16324a;color:#9fd0ff}
+.pane{display:flex;flex-direction:column;min-height:0;background:radial-gradient(circle at 80% 0,#3a141844,transparent 60%)}
+.ph{padding:12px 18px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.msgs{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:72%;padding:8px 12px;border-radius:14px;white-space:pre-wrap;word-break:break-word}
+.m.in{background:var(--i3);align-self:flex-start;border-end-start-radius:4px}
+.m.out{background:linear-gradient(120deg,#7d1a22,#b02c35);align-self:flex-end;border-end-end-radius:4px}
+.m.ai{background:#10283a;border:1px dashed #5ea6e6}.m small{display:block;opacity:.75;font-size:11px;margin-top:3px}
+.ev{align-self:center;background:#10283a;border:1px solid #234a6b;color:#bcdcff;border-radius:99px;padding:4px 14px;font-size:12px;max-width:90%}
+.cmp{border-top:1px solid var(--ln);padding:12px;display:flex;gap:8px;align-items:flex-end}.cmp textarea{resize:none;height:44px}
+.win{padding:10px 14px;color:var(--wn);border-top:1px solid var(--ln);font-size:13px}
+.info{border-inline-start:1px solid var(--ln);padding:16px;overflow:auto;display:grid;gap:14px;align-content:start;background:var(--i2)}
+.info h3{font-size:13px;color:var(--mu);font-weight:600;margin-bottom:6px}
+.av{width:54px;height:54px;border-radius:50%;background:var(--g);display:grid;place-items:center;font-size:22px;font-weight:700}
+.steps{list-style:none;padding:0;display:grid;gap:8px}.steps li{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--mu)}
+.steps i{font-style:normal;width:20px;height:20px;border-radius:50%;border:1px solid var(--ln);display:grid;place-items:center;font-size:11px;flex:none}
+.steps li.done{color:var(--tx)}.steps li.done i{background:#14532d;border-color:#22c55e;color:#bbf7d0}
+.steps li.run{color:#bcdcff}.steps li.run i{border-color:#5ea6e6;animation:sp 1s linear infinite;border-top-color:transparent}
+@keyframes sp{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.steps li.run i{animation:none}}
+table{width:100%;border-collapse:collapse}th,td{text-align:start;padding:10px;border-bottom:1px solid var(--ln);font-size:14px}th{color:var(--mu);font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;flex-wrap:wrap}
+.card{background:var(--i2);border:1px solid var(--ln);border-radius:14px;padding:16px;margin-bottom:12px}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.cen{text-align:center;padding:40px;color:var(--mu)}
+.bk{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:9}
+.md{background:var(--i2);border:1px solid var(--ln);border-radius:16px;padding:22px;width:min(460px,100%);display:grid;gap:12px;max-height:92vh;overflow:auto}
+.toast{position:fixed;bottom:18px;inset-inline-start:18px;background:var(--i3);border:1px solid var(--sl);padding:10px 16px;border-radius:10px;z-index:10}
+.demo{background:#16324a;color:#bcdcff;text-align:center;font-size:12px;padding:3px}.back{display:none}
+#app{display:grid;grid-template-rows:auto 1fr;height:100vh}#app .app{height:auto;min-height:0}
+@media(max-width:1100px){.chats{grid-template-columns:320px 1fr}.info{display:none}}
+@media(max-width:820px){.login{grid-template-columns:1fr}.brand{min-height:200px}.app{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+nav{flex-direction:row;overflow:auto;padding:8px}.nl,.me{display:none}.chats{grid-template-columns:1fr}.pane{display:none}.chats.sc .lst{display:none}.chats.sc .pane{display:flex}.back{display:inline-block}.m{max-width:88%}}
+</style></head><body>
+<div id="login" class="login"><section class="brand"><div class="logo-card"><img src="assets/logo-sahab.png" alt="سحاب العقارية"></div></section>
+<main><form id="lf"><h1>تسجيل الدخول</h1><p class="mu">للموظفين والإدارة — واتساب الشركة <b dir="ltr">01055523412</b></p>
+<label>البريد الإلكتروني<input name="email" type="email" required autocomplete="username"></label>
+<label>كلمة المرور<span class="pw"><input name="password" type="password" required autocomplete="current-password"><button type="button" class="eye" aria-label="إظهار كلمة المرور" title="إظهار كلمة المرور" aria-pressed="false"><svg class="on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M17.94 17.94A10.9 10.9 0 0 1 12 20C5 20 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg></button></span></label>
+<label class="chk"><input type="checkbox" name="rem"> تذكرني على هذا الجهاز</label>
+<div id="le" class="err" role="alert"></div><button class="btn">دخول</button><button type="button" class="btn s" data-a="demo">تجربة بدون خادم (بيانات تجريبية)</button></form></main></div>
+<div id="app" hidden><div id="dm" class="demo" hidden>وضع تجريبي — البيانات محلية ولا يُرسل شيء لواتساب</div><div class="app"><nav id="nv"></nav><section id="mn" class="v"></section></div></div>
+<script>
+const $=(s,r=document)=>r.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const E={invalid_credentials:'البريد أو كلمة المرور غير صحيحة',pending_approval:'حسابك بانتظار اعتماد الإدارة',account_disabled:'الحساب موقوف',outside_24h_window:'خارج نافذة 24 ساعة: أرسل قالباً معتمداً',not_your_contact:'هذا العميل ليس من عملائك',needs_different_admin:'يلزم أدمن آخر للاعتماد',cannot_remove_last_admin:'لا يمكن إزالة آخر أدمن',phone_already_exists:'الرقم مسجل لموظف آخر',whatsapp_send_failed:'فشل الإرسال عبر واتساب',validation_error:'بيانات غير صحيحة',unauthorized:'انتهت الجلسة',no_server:'تعذّر الوصول إلى خادم سحاب. شغّل الخادم (START_WINDOWS.bat) ثم افتح النظام من http://localhost:3000','405':'هذه الصفحة مفتوحة من مكان لا يشغّل الخادم. افتح النظام من عنوان الخادم نفسه (مثل http://localhost:3000) ثم أعد المحاولة','404':'مسار الدخول غير موجود على هذا العنوان. افتح النظام من عنوان الخادم نفسه ثم أعد المحاولة',not_found:'مسار الدخول غير موجود على هذا العنوان. افتح النظام من عنوان الخادم نفسه ثم أعد المحاولة','429':'محاولات دخول كثيرة. انتظر دقيقة ثم أعد المحاولة',too_many_requests:'محاولات دخول كثيرة. انتظر دقيقة ثم أعد المحاولة','500':'الخادم لا يستجيب الآن. تأكد أنه يعمل ثم أعد المحاولة','502':'الخادم لا يستجيب الآن. تأكد أنه يعمل ثم أعد المحاولة','503':'الخادم لا يستجيب الآن. تأكد أنه يعمل ثم أعد المحاولة','504':'الخادم لا يستجيب الآن. تأكد أنه يعمل ثم أعد المحاولة','Failed to fetch':'انقطع الاتصال بالخادم. تأكد أنه يعمل ثم أعد المحاولة','Load failed':'انقطع الاتصال بالخادم. تأكد أنه يعمل ثم أعد المحاولة','NetworkError when attempting to fetch resource.':'انقطع الاتصال بالخادم. تأكد أنه يعمل ثم أعد المحاولة'};
+const CH={whatsapp:['WA','واتساب'],telegram:['TG','تيليجرام'],instagram:['IG','إنستجرام'],messenger:['MS','مسنجر']};
+const ST={new:'جديد',wait:'بانتظار الرد',follow:'قيد المتابعة',ai:'محوّل من المساعد',done:'مغلق'};
+const S={tok:null,ref:null,me:null,demo:0,view:'chats',deps:[],agents:[],list:[],cur:null,msgs:[],ct:null,q:'',fd:'',fa:'',fc:'',fu:false,pend:0,run:null};
+const tm=x=>x?new Date(x).toLocaleString('ar-EG',{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'}):'';
+const toast=t=>{const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.append(d);setTimeout(()=>d.remove(),3500)};
+const msg=e=>E[e.message]||e.message||'حدث خطأ';const stg=()=>localStorage.getItem('ar')?localStorage:sessionStorage;
+const chb=c=>{const k=CH[c]?c:'whatsapp';return`<i class="ch ${k}" title="${CH[k][1]}">${CH[k][0]}</i>`};
+/* ---------- بيانات تجريبية ---------- */
+const N=Date.now(),mn=m=>new Date(N-m*6e4).toISOString();
+const D={deps:[{id:'d1',name_ar:'المبيعات'},{id:'d2',name_ar:'المالية والأقساط'},{id:'d3',name_ar:'زوار المشروعات'},{id:'d4',name_ar:'خدمة العملاء'}],
+agents:[{id:'a1',name:'مدير النظام',phone:'01055523412',role:'admin',status:'active',approval_status:'approved',phone_verified_at:1,department_id:'d4',department:{name_ar:'خدمة العملاء'}},
+{id:'a2',name:'منى خالد',phone:'01011112222',role:'agent',status:'active',approval_status:'approved',phone_verified_at:1,department_id:'d1',department:{name_ar:'المبيعات'}},
+{id:'a3',name:'أحمد سمير',phone:'01233334444',role:'agent',status:'on_break',approval_status:'approved',phone_verified_at:1,department_id:'d2',department:{name_ar:'المالية والأقساط'}},
+{id:'a4',name:'هدى عادل',phone:'01155556666',role:'agent',status:'inactive',approval_status:'pending',phone_verified_at:null,department_id:'d3',department:{name_ar:'زوار المشروعات'}}],
+cts:[{id:'c1',name:'محمد إبراهيم',phone:'201001234567',channel:'whatsapp',st:'ai',tags:['مهتم بشقة 3 غرف','ميزانية 2.5 مليون'],agent_id:'a2',dep:'d1',last_inbound_at:mn(4),ai:{intent:'شراء وحدة سكنية',dep:'المبيعات',sum:'عميل يسأل عن شقق 3 غرف بالتجمع الخامس بميزانية حتى 2.5 مليون.'},
+ m:[['in','السلام عليكم، عايز شقة 3 غرف في التجمع',22],['ev','المساعد الذكي: صنّف العميل «شراء وحدة» ← قسم المبيعات',21],['ai','أهلاً بحضرتك في سحاب العقارية. ممكن تحدد الميزانية التقريبية؟',21],['in','لحد 2.5 مليون',9],['ev','المساعد الذكي: حوّل المحادثة إلى منى خالد',8]]},
+{id:'c2',name:'sara.eg',phone:'@sara.eg',channel:'instagram',st:'wait',tags:['بانتظار الرد','سأل عن المعاينة'],agent_id:'a2',dep:'d3',last_inbound_at:mn(15),ai:{intent:'طلب معاينة',dep:'زوار المشروعات',sum:'تطلب موعد معاينة يوم الخميس.'},m:[['in','ممكن أعاين المشروع يوم الخميس؟',15]]},
+{id:'c3',name:'Karim Adel',phone:'@karim_a',channel:'telegram',st:'new',tags:['عميل جديد'],agent_id:null,dep:null,last_inbound_at:mn(2),ai:null,m:[['in','عندكم وحدات تجارية؟',2]]},
+{id:'c4',name:'نورا حسن',phone:'مسنجر · نورا حسن',channel:'messenger',st:'follow',tags:['أقساط'],agent_id:'a3',dep:'d2',last_inbound_at:mn(300),ai:{intent:'استفسار أقساط',dep:'المالية والأقساط',sum:'استفسار عن موعد القسط القادم.'},m:[['in','موعد القسط الجاي إمتى؟',310],['out','القسط يستحق أول الشهر القادم.',305]]}],
+ap:[{id:'p1',requested_by_name:'منى خالد',contact:{name:'محمد إبراهيم'},created_at:mn(6),message:{message_body:'تم تجهيز عرض الأسعار، سعر المتر 38 ألف مع خطة سداد 7 سنوات.'}}]};
+const AI_STEPS=['استلام الرسالة من القناة','تحليل نية العميل','تصنيف العميل ووسمه','اختيار القسم المناسب','إرسال رد آلي أولي','تحويل المحادثة للموظف المسؤول'];
+function mock(p,o){const m=o.method||'GET',dn=id=>(D.deps.find(d=>d.id===id)||{}).name_ar,an=id=>(D.agents.find(a=>a.id===id)||{}).name,
+ L=c=>{const lm=c.m[c.m.length-1];return{contact_id:c.id,name:c.name,phone:c.phone,channel:c.channel,last_message:lm[1],last_direction:lm[0]==='in'?'inbound':'outbound',last_message_at:mn(lm[2]),department_name:dn(c.dep),agent_name:an(c.agent_id),status:c.st,tags:c.tags}};let r;
+ if(p==='/auth/me')r={agent:{...D.agents[0],department_name:'خدمة العملاء'}};else if(p==='/departments')r={departments:D.deps};
+ else if(p.startsWith('/conversations/admin')||p.startsWith('/conversations/agent')){const q=new URLSearchParams(p.split('?')[1]);let a=D.cts.map(L);if(q.get('unassigned'))a=a.filter(c=>!c.agent_name);if(q.get('search'))a=a.filter(c=>(c.name+c.phone).includes(q.get('search')));if(q.get('department_id'))a=a.filter(c=>c.department_name===dn(q.get('department_id')));if(q.get('agent_id'))a=a.filter(c=>c.agent_name===an(q.get('agent_id')));r={conversations:a}}
+ else if(/^\/conversations\/.+\/messages/.test(p)){const c=D.cts.find(x=>x.id===p.split('/')[2]);r={contact:{...L(c),id:c.id,last_inbound_at:c.last_inbound_at,ai:c.ai},messages:c.m.map((x,i)=>({id:c.id+i,direction:x[0]==='in'?'inbound':'outbound',sender_type:x[0]==='ai'?'ai':x[0]==='ev'?'event':'agent',message_body:x[1],timestamp:mn(x[2]),status:'delivered'}))}}
+ else if(p==='/whatsapp/send'){const c=D.cts.find(x=>x.id===o.body.contact_id);c.m.push(['out',o.body.body||'[قالب]',0]);c.st='follow';r={ok:1}}
+ else if(p==='/agents'&&m==='GET')r={agents:D.agents};else if(p==='/agents'){D.agents.push({id:'a'+(D.agents.length+1),role:'agent',status:'active',approval_status:'pending',phone_verified_at:null,...o.body,department:D.deps.find(d=>d.id===o.body.department_id)});r={verification:{sent:true}}}
+ else if(/^\/agents\/a\d+$/.test(p)){const a=D.agents.find(x=>x.id===p.split('/')[2]);if(m==='PUT'){Object.assign(a,o.body);a.department=D.deps.find(d=>d.id===a.department_id)}else D.agents.splice(D.agents.indexOf(a),1);r={reassigned_contacts:0}}
+ else if(/\/agents\/.+\/approve/.test(p)){D.agents.find(x=>x.id===p.split('/')[2]).approval_status='approved';r={}}else if(/\/agents\/.+\/reject/.test(p)){D.agents.find(x=>x.id===p.split('/')[2]).approval_status='rejected';r={}}
+ else if(/send-verification/.test(p))r={verification:{sent:true}};else if(p.startsWith('/approvals/outbound?'))r={approvals:structuredClone(D.ap)};else if(/^\/approvals\/outbound\/.+\/(approve|reject)/.test(p)){D.ap=[];r={}}else r={};
+ return Promise.resolve(r)}
+/* ---------- الاتصال ---------- */
+/* ---------- عنوان الخادم: يكتشف خادم سحاب الحقيقي (حل خطأ 405) ---------- */
+const API={base:null,p:null};
+function apiCands(){const l=location,c=[],q=new URLSearchParams(l.search).get('api'),m=document.querySelector('meta[name="api-base"]');let s='';
+ try{if(q)localStorage.setItem('api_base',q);s=localStorage.getItem('api_base')||''}catch{}
+ [q,window.API_BASE,m&&m.content,s].forEach(x=>x&&c.push(String(x).trim().replace(/\/+$/,'')));
+ if(/^https?:$/.test(l.protocol))c.push('');
+ [`http://${l.hostname||'localhost'}:3000`,'http://localhost:3000','http://127.0.0.1:3000'].forEach(x=>c.push(x));
+ return[...new Set(c)]}
+async function probe(b){const ac=new AbortController(),t=setTimeout(()=>ac.abort(),4000);
+ try{const j=await(await fetch(b+'/health',{signal:ac.signal,cache:'no-store'})).json();return!!j&&typeof j.dry_run!=='undefined'}catch{return false}finally{clearTimeout(t)}}
+function apiBase(){if(API.base!==null)return Promise.resolve(API.base);
+ return API.p||(API.p=(async()=>{try{for(const b of apiCands())if(await probe(b)){API.base=b;try{b?localStorage.setItem('api_base',b):localStorage.removeItem('api_base')}catch{}return b}throw new Error('no_server')}finally{API.p=null}})())}
+async function api(p,o={}){if(S.demo)return mock(p,o);const r=await fetch(await apiBase()+'/api'+p,{method:o.method||'GET',headers:{'content-type':'application/json',...(S.tok?{authorization:'Bearer '+S.tok}:{})},body:o.body?JSON.stringify(o.body):undefined});
+ if(r.status===401&&S.ref&&!o.r&&!p.startsWith('/auth')){const j=await fetch((API.base||'')+'/api/auth/refresh',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({refresh_token:S.ref})});
+  if(j.ok){setTok(await j.json());return api(p,{...o,r:1})}logout();throw new Error('unauthorized')}
+ if(r.status===405)API.base=null;
+ const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||r.status),{data:j});return j}
+function setTok(t){S.tok=t.access_token;S.ref=t.refresh_token;stg().setItem('at',S.tok);stg().setItem('rt',S.ref)}
+function logout(){try{localStorage.clear();sessionStorage.clear()}catch{}S.tok=S.ref=S.me=null;S.demo=0;clearInterval(S.t1);clearInterval(S.t2);$('#app').hidden=true;$('#login').hidden=false}
+async function boot(){if(!S.demo){try{S.tok=stg().getItem('at')||localStorage.getItem('at')||sessionStorage.getItem('at');S.ref=localStorage.getItem('rt')||sessionStorage.getItem('rt')}catch{}if(!S.tok)return}
+ try{S.me=(await api('/auth/me')).agent;S.deps=(await api('/departments')).departments;$('#login').hidden=true;$('#app').hidden=false;$('#dm').hidden=!S.demo;nav();go('chats');
+  clearInterval(S.t1);clearInterval(S.t2);S.t1=setInterval(()=>{if(!document.hidden&&S.view==='chats'&&S.run==null){loadList();if(S.cur)loadChat(true)}},5000);S.t2=setInterval(pendCount,15000);pendCount()}
+ catch(e){$('#le').textContent=msg(e);logout()}}
+$('#lf').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target),sb=e.submitter,sl=sb&&sb.textContent;$('#le').textContent='';if(sb){sb.disabled=true;sb.textContent='جارٍ الدخول…'}
+ try{const t=await api('/auth/login',{method:'POST',body:{email:f.get('email').trim(),password:f.get('password')}});localStorage.removeItem('ar');if(f.get('rem'))localStorage.setItem('ar','1');setTok(t);await boot()}catch(x){$('#le').textContent=msg(x)}finally{if(sb){sb.disabled=false;sb.textContent=sl}}});
+const adm=()=>S.me?.role==='admin';
+function nav(){const it=[['chats','المحادثات الموحدة'],...(adm()?[['team','الموظفون والأقسام'],['appr','الموافقات'],['stat','حالة النظام']]:[])];
+ $('#nv').innerHTML='<div class="nl"><img src="assets/logo-sahab.png" alt="سحاب العقارية"></div>'+it.map(([k,l])=>`<button data-a="go" data-k="${k}" class="${S.view===k?'on':''}">${l}${k==='appr'&&S.pend?`<span class="bdg">${S.pend}</span>`:''}</button>`).join('')+`<div class="me"><b>${esc(S.me.name)}</b><div class="mu">${adm()?'مدير':'موظف'} · ${esc(S.me.department_name||'')}</div><span class="wa" dir="ltr">واتساب الشركة: 01055523412</span><button data-a="out" class="btn s sm" style="margin-top:8px">تسجيل الخروج</button></div>`}
+function go(k){S.view=k;nav();({chats:vChats,team:vTeam,appr:vAppr,stat:vStat})[k]()}
+async function pendCount(){if(!adm())return;try{S.pend=(await api('/approvals/outbound?status=pending')).approvals.length;nav()}catch{}}
+/* ---------- المحادثات الموحدة ---------- */
+const stOf=c=>c.status||(c.last_direction==='inbound'?'wait':'follow');
+function vChats(){const o=adm()?`<select data-c="fd" aria-label="القسم"><option value="">كل الأقسام</option>${S.deps.map(d=>`<option value="${d.id}">${esc(d.name_ar)}</option>`).join('')}</select><select data-c="fa" aria-label="الموظف"><option value="">كل الموظفين</option>${S.agents.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('')}</select><label class="chk"><input type="checkbox" data-c="fu"> بدون موظف فقط</label>`:'';
+ const pills=`<div class="r"><span class="pill ${S.fc?'':'on'}" data-a="fch" data-k="">الكل</span>${Object.entries(CH).map(([k,v])=>`<span class="pill ${S.fc===k?'on':''}" data-a="fch" data-k="${k}">${v[1]}</span>`).join('')}</div>`;
+ $('#mn').className='v chats';$('#mn').innerHTML=`<div class="lst"><div class="flt"><input data-c="q" placeholder="بحث بالاسم أو الرقم" value="${esc(S.q)}">${pills}${o}</div><div class="items" id="it"></div></div><div class="pane" id="pn"><div class="cen">اختر محادثة لعرضها</div></div><aside class="info" id="inf"></aside>`;
+ if(adm()&&!S.agents.length)api('/agents').then(r=>{S.agents=r.agents;if(S.view==='chats'){const s=$('[data-c=fa]');if(s)s.innerHTML='<option value="">كل الموظفين</option>'+S.agents.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join('')}}).catch(()=>{});
+ loadList();if(S.cur)loadChat()}
+async function loadList(){try{const p=new URLSearchParams({limit:60});if(S.q)p.set('search',S.q);
+ let r;if(adm()){if(S.fd)p.set('department_id',S.fd);if(S.fa)p.set('agent_id',S.fa);if(S.fu)p.set('unassigned','true');r=await api('/conversations/admin?'+p)}else r=await api(`/conversations/agent/${S.me.id}?`+p);
+ S.list=r.conversations.filter(c=>!S.fc||(c.channel||'whatsapp')===S.fc);const el=$('#it');if(!el)return;
+ el.innerHTML=S.list.length?S.list.map(c=>{const s=stOf(c);return`<div class="it ${c.contact_id===S.cur?'on':''}" data-a="open" data-id="${c.contact_id}"><b><span class="row">${chb(c.channel)}${esc(c.name||c.phone)}</span><small>${tm(c.last_message_at)}</small></b><small>${esc((c.last_message||'').slice(0,60))}</small><span>${s==='wait'?'<span class="tag w">بانتظار الرد</span>':s==='ai'?'<span class="tag ai">محوّل من المساعد</span>':s==='new'?'<span class="tag w">جديد</span>':''}${c.department_name?`<span class="tag">${esc(c.department_name)}</span>`:''}${adm()?`<span class="tag">${esc(c.agent_name||'بلا موظف')}</span>`:''}</span></div>`}).join(''):'<div class="cen">لا توجد محادثات</div>'}catch(e){if($('#it'))$('#it').innerHTML=`<div class="cen bad">${esc(msg(e))}</div>`}}
+async function loadChat(quiet){try{const r=await api(`/conversations/${S.cur}/messages?limit=100`);S.ct=r.contact;const same=JSON.stringify(r.messages.map(m=>[m.id,m.status]))===JSON.stringify(S.msgs.map(m=>[m.id,m.status]));S.msgs=r.messages;if(quiet&&same)return;drawChat()}catch(e){if(!quiet)toast(msg(e))}}
+const tick=m=>m.direction!=='outbound'?'':({sent:'✓',delivered:'✓✓',read:'✓✓',failed:'⚠ فشل',pending:'…',pending_approval:'⏳ بانتظار اعتماد الإدارة',rejected:'✖ رُفضت'})[m.status]||'';
+function drawChat(){const c=S.ct,pn=$('#pn');if(!pn||!c)return;const wa=(c.channel||'whatsapp')==='whatsapp',inWin=!wa||(c.last_inbound_at&&Date.now()-new Date(c.last_inbound_at)<864e5);const keep=$('#ms')?.scrollTop;const nb=!$('#ms')||($('#ms').scrollHeight-$('#ms').scrollTop-$('#ms').clientHeight<80);
+ pn.innerHTML=`<div class="ph"><div class="row"><button class="btn s sm back" data-a="bk">→</button>${chb(c.channel)}<div><b>${esc(c.name||c.phone)}</b><div class="mu" dir="ltr" style="text-align:start">${esc(c.phone)}</div></div></div><button class="btn s sm" data-a="ai">تشغيل المساعد الذكي</button></div><div class="msgs" id="ms">${S.msgs.map(m=>m.sender_type==='event'?`<div class="ev">${esc(m.message_body)}</div>`:`<div class="m ${m.direction==='inbound'?'in':'out'} ${m.sender_type==='ai'?'ai':''}">${esc(m.message_body)}<small>${m.sender_type==='ai'?'مساعد آلي · ':''}${tm(m.timestamp)} ${tick(m)}${m.error?' · '+esc(m.error):''}</small></div>`).join('')}</div>
+ ${inWin?'':'<div class="win">انتهت نافذة الـ 24 ساعة — يلزم إرسال قالب معتمد من Meta.</div>'}
+ <div class="cmp">${inWin?'<textarea id="tx" placeholder="اكتب رسالتك…"></textarea><button class="btn" data-a="send">إرسال</button>':'<input id="tn" placeholder="اسم القالب المعتمد"><button class="btn" data-a="tpl">إرسال قالب</button>'}</div>`;
+ const m=$('#ms');m.scrollTop=nb||keep==null?m.scrollHeight:keep;drawInfo()}
+function drawInfo(){const c=S.ct,el=$('#inf');if(!el||!c)return;const a=c.ai,run=S.run,done=a?AI_STEPS.length:0,st=stOf(c);
+ el.innerHTML=`<div class="row"><div class="av">${esc((c.name||'؟')[0])}</div><div><b>${esc(c.name||c.phone)}</b><div class="mu">${CH[c.channel||'whatsapp'][1]}</div></div></div>
+ <div><h3>حالة العميل</h3><span class="tag ${st==='wait'||st==='new'?'w':st==='ai'?'ai':''}">${ST[st]}</span></div>
+ <div><h3>الموظف المسؤول</h3>${esc(c.agent_name||'غير معيّن')}<div class="mu">${esc(c.department_name||'بدون قسم')}</div></div>
+ <div><h3>الوسوم</h3>${(c.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')||'<span class="mu">لا وسوم</span>'}</div>
+ <div><h3>سجل المساعد الذكي</h3>${a||run!=null?`<p style="font-size:13px;margin-bottom:8px">${esc(a?.sum||'')}</p>`:'<p class="mu" style="font-size:13px;margin-bottom:8px">لم يتدخل بعد</p>'}<ol class="steps">${AI_STEPS.map((s,i)=>{const k=run!=null?(i<run?'done':i===run?'run':''):(i<done?'done':'');return`<li class="${k}"><i>${k==='done'?'✓':i+1}</i><span>${s}</span></li>`}).join('')}</ol></div>`}
+async function aiRun(){if(S.run!=null||!S.ct)return;if(!S.demo)return toast('التصنيف الآلي يعمل تلقائياً عند أول رسالة (src/ai.js)');const c=D.cts.find(x=>x.id===S.cur);c.ai=null;S.ct.ai=null;S.run=0;drawInfo();
+ for(let i=0;i<AI_STEPS.length;i++){S.run=i;drawInfo();await new Promise(r=>setTimeout(r,900));
+  if(i===2)c.tags=[...new Set([...c.tags,'صُنّف آلياً'])];
+  if(i===3){c.dep=c.dep||'d1';c.m.push(['ev','المساعد الذكي: صنّف العميل ← '+D.deps.find(d=>d.id===c.dep).name_ar,0]);await loadChat(true)}
+  if(i===4){c.m.push(['ai','أهلاً بك في سحاب العقارية، استلمنا رسالتك وسيتواصل معك أحد مستشارينا خلال دقائق.',0]);await loadChat(true)}
+  if(i===5){c.agent_id=c.agent_id||'a2';c.st='ai';c.ai={sum:'صنّف المساعد الطلب وحدد القسم وحوّله للموظف.'};c.m.push(['ev','المساعد الذكي: حوّل المحادثة إلى '+D.agents.find(a=>a.id===c.agent_id).name,0])}}
+ S.run=null;await loadChat();loadList();toast('أنهى المساعد الذكي كل الخطوات')}
+async function send(){const b=$('#tx').value.trim();if(!b)return;$('#tx').value='';try{const r=await api('/whatsapp/send',{method:'POST',body:{contact_id:S.cur,body:b}});if(r.approval_required)toast('أُرسلت لاعتماد الإدارة');await loadChat()}catch(e){toast(msg(e));$('#tx').value=b}}
+async function tpl(){const n=$('#tn').value.trim();if(!n)return;try{const r=await api('/whatsapp/send',{method:'POST',body:{contact_id:S.cur,template:{name:n,language:'ar'}}});if(r.approval_required)toast('أُرسل القالب لاعتماد الإدارة');await loadChat()}catch(e){toast(msg(e))}}
+/* ---------- الموظفون ---------- */
+const SL={active:'<span class=ok>متاح</span>',inactive:'<span class=bad>موقوف</span>',on_break:'<span style=color:var(--wn)>استراحة</span>'};
+async function vTeam(){$('#mn').className='v';$('#mn').innerHTML='<div class="cen">جارٍ التحميل…</div>';try{const r=await api('/agents');S.agents=r.agents;
+ const cnt=S.deps.map(d=>`<span class="tag">${esc(d.name_ar)}: ${S.agents.filter(a=>a.department_id===d.id).length}</span>`).join('');
+ $('#mn').innerHTML=`<div class="top"><h1>الموظفون والأقسام</h1><button class="btn" data-a="add">+ إضافة موظف</button></div><div class="card"><div class="mu" style="margin-bottom:6px">الأقسام</div>${cnt}</div><div class="card" style="overflow:auto"><table><tr><th>الاسم</th><th>الرقم</th><th>القسم</th><th>الدور</th><th>الحالة</th><th>الاعتماد</th><th>التوثيق</th><th></th></tr>${S.agents.map(a=>`<tr><td>${esc(a.name)}</td><td dir="ltr">${esc(a.phone)}</td><td>${esc(a.department?.name_ar||'')}</td><td>${a.role==='admin'?'مدير':'موظف'}</td><td>${SL[a.status]||''}</td><td>${({approved:'<span class=ok>معتمد</span>',pending:'<span style=color:var(--wn)>بانتظار</span>',rejected:'<span class=bad>مرفوض</span>'})[a.approval_status]}</td><td>${a.phone_verified_at?'<span class=ok>موثّق</span>':'<span class=bad>غير موثّق</span>'}</td><td class="row"><button class="btn s sm" data-a="edit" data-id="${a.id}">تعديل</button>${a.approval_status==='pending'?`<button class="btn sm" data-a="aok" data-id="${a.id}">اعتماد</button><button class="btn d sm" data-a="ano" data-id="${a.id}">رفض</button>`:''}${a.phone_verified_at?'':`<button class="btn s sm" data-a="ver" data-id="${a.id}">إرسال كود</button>`}<button class="btn d sm" data-a="del" data-id="${a.id}">حذف</button></td></tr>`).join('')}</table></div>`}catch(e){$('#mn').innerHTML=`<div class="cen bad">${esc(msg(e))}</div>`}}
+function form(a){const dep=`<select name="department_id" required>${S.deps.map(d=>`<option value="${d.id}" ${a?.department_id===d.id?'selected':''}>${esc(d.name_ar)}</option>`).join('')}</select>`;
+ const bk=document.createElement('div');bk.className='bk';bk.innerHTML=`<form class="md"><h2>${a?'تعديل موظف':'إضافة موظف'}</h2><label>الاسم<input name="name" required value="${esc(a?.name||'')}"></label><label>رقم واتساب (مثال 01012345678)<input name="phone" required dir="ltr" value="${esc(a?.phone||'')}"></label><label>القسم${dep}</label><label>الدور<select name="role"><option value="agent">موظف</option><option value="admin" ${a?.role==='admin'?'selected':''}>مدير</option></select></label>
+ ${a?`<label>الحالة<select name="status"><option value="active">متاح</option><option value="on_break" ${a.status==='on_break'?'selected':''}>استراحة</option><option value="inactive" ${a.status==='inactive'?'selected':''}>موقوف</option></select></label><label>كلمة مرور جديدة (اختياري)<input name="password" type="password" minlength="8"></label>`:'<label>بريد الدخول (اختياري)<input name="email" type="email"></label><label>كلمة المرور (8 أحرف على الأقل، مع البريد)<input name="password" type="password" minlength="8"></label>'}
+ <div class="err" id="fe"></div><div class="row"><button class="btn">حفظ</button><button type="button" class="btn s" data-a="cl">إلغاء</button></div></form>`;document.body.append(bk);
+ bk.querySelector('form').addEventListener('submit',async e=>{e.preventDefault();const f=Object.fromEntries(new FormData(e.target));Object.keys(f).forEach(k=>f[k]===''&&delete f[k]);
+  try{const r=a?await api('/agents/'+a.id,{method:'PUT',body:f}):await api('/agents',{method:'POST',body:f});bk.remove();const v=r.verification;toast(v?(v.sent?'أُرسل كود التوثيق على واتساب الموظف':'تعذّر إرسال الكود'+(v.dev_code?' · كود التجربة: '+v.dev_code:'')):'تم الحفظ');vTeam()}catch(x){bk.querySelector('#fe').textContent=msg(x)}})}
+/* ---------- الموافقات ---------- */
+async function vAppr(){$('#mn').className='v';try{const r=await api('/approvals/outbound?status=pending');S.pend=r.approvals.length;nav();
+ $('#mn').innerHTML=`<div class="top"><h1>رسائل بانتظار الاعتماد</h1></div>`+(r.approvals.length?r.approvals.map(a=>`<div class="card"><div class="mu">من ${esc(a.requested_by_name||'—')} إلى ${esc(a.contact?.name||a.contact?.phone||'')} · ${tm(a.created_at)}</div><p style="margin:10px 0;white-space:pre-wrap">${esc(a.message?.message_body||'')}</p><div class="row"><button class="btn sm" data-a="mok" data-id="${a.id}">اعتماد وإرسال</button><button class="btn d sm" data-a="mno" data-id="${a.id}">رفض</button></div></div>`).join(''):'<div class="cen">لا توجد رسائل معلّقة</div>')}catch(e){$('#mn').innerHTML=`<div class="cen bad">${esc(msg(e))}</div>`}}
+/* ---------- الحالة ---------- */
+async function vStat(){$('#mn').className='v';let h={};if(S.demo)h={db:1,latency_ms:12,dry_run:1};else try{h=await(await fetch((API.base||'')+'/health')).json()}catch{}
+ $('#mn').innerHTML=`<div class="top"><h1>حالة النظام</h1></div><div class="card"><p>الخادم: <b class="${h.db?'ok':'bad'}">${h.db?'يعمل':'غير متصل'}</b></p><p>قاعدة البيانات: <b class="${h.db?'ok':'bad'}">${h.db?'متصلة · '+h.latency_ms+'ms':'غير متصلة'}</b></p><p>وضع الإرسال: <b>${h.dry_run?'تجريبي (لا يُرسل فعلياً)':'فعلي عبر Meta'}</b></p><p>رقم واتساب الشركة: <b dir="ltr">01055523412</b></p></div><div class="card"><p class="mu">رابط الـ Webhook لإعداد Meta:</p><p dir="ltr" style="text-align:start"><b>${esc(location.origin)}/webhook</b></p><p class="mu" style="margin-top:8px">سياسات الموافقة وباقي الإعدادات تُضبط من ملف <code>.env</code> ثم إعادة تشغيل الخادم.</p></div>`}
+/* ---------- الأحداث ---------- */
+const A={go:t=>go(t.dataset.k),out:logout,cl:t=>t.closest('.bk').remove(),bk:()=>$('.chats').classList.remove('sc'),add:()=>form(),
+ demo:()=>{S.demo=1;boot()},ai:aiRun,fch:t=>{S.fc=t.dataset.k;vChats()},
+ open:t=>{S.cur=t.dataset.id;S.msgs=[];$('.chats').classList.add('sc');loadList();loadChat()},send,tpl,
+ edit:t=>form(S.agents.find(a=>a.id===t.dataset.id)),
+ aok:async t=>{try{const r=await api(`/agents/${t.dataset.id}/approve`,{method:'POST'});toast(r.note||'تم الاعتماد');vTeam()}catch(e){toast(msg(e))}},
+ ano:async t=>{if(confirm('رفض هذا الموظف؟'))try{await api(`/agents/${t.dataset.id}/reject`,{method:'POST'});vTeam()}catch(e){toast(msg(e))}},
+ ver:async t=>{try{const r=await api(`/agents/${t.dataset.id}/send-verification`,{method:'POST'});toast(r.verification.sent?'أُرسل الكود':'تعذّر الإرسال'+(r.verification.dev_code?' · كود التجربة: '+r.verification.dev_code:''))}catch(e){toast(msg(e))}},
+ del:async t=>{if(confirm('إلغاء تفعيل الموظف نهائياً وإعادة توزيع عملائه؟'))try{const r=await api('/agents/'+t.dataset.id,{method:'DELETE'});toast(`تم · أُعيد توزيع ${r.reassigned_contacts} عميل`);vTeam()}catch(e){toast(msg(e))}},
+ mok:async t=>{try{await api(`/approvals/outbound/${t.dataset.id}/approve`,{method:'POST'});toast('أُرسلت');vAppr()}catch(e){toast(msg(e));vAppr()}},
+ mno:async t=>{const r=prompt('سبب الرفض (اختياري)');if(r===null)return;try{await api(`/approvals/outbound/${t.dataset.id}/reject`,{method:'POST',body:{reason:r}});vAppr()}catch(e){toast(msg(e))}}};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t)A[t.dataset.a]?.(t)});
+let dt;document.addEventListener('input',e=>{const k=e.target.dataset.c;if(!k)return;S[k]=e.target.type==='checkbox'?e.target.checked:e.target.value;clearTimeout(dt);dt=setTimeout(loadList,300)});
+document.addEventListener('keydown',e=>{if(e.target.id==='tx'&&e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+boot();
+</script><script>
+(()=>{const f=document.getElementById('lf'),b=f&&f.querySelector('.eye'),i=f&&f.querySelector('input[name=password]');if(!b||!i)return;
+const set=v=>{i.type=v?'text':'password';b.setAttribute('aria-pressed',v);const t=v?'إخفاء كلمة المرور':'إظهار كلمة المرور';b.setAttribute('aria-label',t);b.title=t;b.querySelector('.on').hidden=v;b.querySelector('.off').hidden=!v};
+b.addEventListener('click',()=>{set(i.type==='password');i.focus()});
+f.addEventListener('submit',()=>set(false))})();
+</script>
+</body></html>
