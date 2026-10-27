@@ -5,18 +5,18 @@ services:
     name: sahab-wa-engine
     runtime: node
     plan: free
-    region: frankfurt          # الأقرب لمصر
+    region: frankfurt # الأقرب لمصر
     branch: main
-    autoDeployTrigger: commit  # نشر تلقائي مع كل push
+    autoDeployTrigger: commit # نشر تلقائي مع كل push
     buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_VERSION
-        value: "20"
-      # ---- وضع الإرسال: ابدأ true، وحوّله false بعد ضبط Meta ----
+        value: "22"
+      # ---- وضع الإرسال: false = فعلي (يتطلب META_ACCESS_TOKEN و META_PHONE_NUMBER_ID)، true = تجريبي ----
       - key: DRY_RUN
-        value: "true"
+        value: "false"
       # ---- أسرار: تُدخل من لوحة Render ولا تُكتب هنا أبداً ----
       - key: SUPABASE_URL
         sync: false
