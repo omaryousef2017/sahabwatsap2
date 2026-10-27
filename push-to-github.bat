@@ -6,7 +6,7 @@ where git >nul 2>nul || (echo Git is not installed. Download: https://git-scm.co
 rem --- safety: .env must be ignored ---
 findstr /x /c:".env" .gitignore >nul || (echo STOP: .env is not listed in .gitignore & pause & exit /b 1)
 
-set /p REPO=https://github.com/omaryousef2017/sahabwatsap (e.g. https://github.com/USER/sahab-wa-engine.git): 
+set /p REPO=https://github.com/omaryousef2017/sahabwatsap2.git (e.g. https://github.com/USER/sahab-wa-engine.git): 
 if "%REPO%"=="" (echo No URL entered. & pause & exit /b 1)
 
 if not exist .git git init -b main
