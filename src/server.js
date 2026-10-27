@@ -14,6 +14,8 @@ import agents from './routes/agents.js';
 import approvals from './routes/approvals.js';
 import authRoutes from './routes/auth.js';
 import meta from './routes/meta.js';
+import settingsRoutes from './routes/settings.js';
+import { loadSettings } from './settings.js';
 
 const app = express();
 app.set('trust proxy', 1); // خلف Nginx
@@ -40,6 +42,7 @@ app.use('/api/whatsapp', whatsapp);
 app.use('/api/conversations', conversations);
 app.use('/api/agents', agents);
 app.use('/api/approvals', approvals);
+app.use('/api/settings', settingsRoutes);
 app.use('/api', meta);
 
 // فحص قاعدة البيانات بمهلة 8 ثواني: بدل ما يعلّق، يقول السبب
@@ -72,6 +75,9 @@ app.use(express.static(path.join(here, '..', 'public')));
 
 app.use((_req, res) => res.status(404).json({ error: 'not_found' }));
 app.use(errorHandler);
+
+// نحمّل إعدادات اللوحة (بمهلة 8 ثواني) قبل استقبال أي رسالة
+await Promise.race([loadSettings(), new Promise((r) => setTimeout(r, 8000))]);
 
 app.listen(config.port, async () => {
   console.log(`SAHAB WhatsApp engine on :${config.port}${config.dryRun ? '  [DRY_RUN]' : ''}`);

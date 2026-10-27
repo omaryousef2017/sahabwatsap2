@@ -192,3 +192,12 @@ alter table contacts add column if not exists tags text[] not null default '{}';
 alter table contacts add column if not exists ai_summary text;
 alter table contacts add column if not exists ai_intent text;
 create index if not exists contacts_channel_idx on contacts(channel);
+
+-- إعدادات التشغيل من لوحة الإدارة
+create table if not exists app_settings (
+  key        text primary key,
+  value      jsonb not null default '{}'::jsonb,
+  updated_by uuid references agents(id) on delete set null,
+  updated_at timestamptz not null default now()
+);
+alter table app_settings enable row level security;
