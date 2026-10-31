@@ -41,7 +41,8 @@ export async function issueVerification(agent) {
     });
     return { sent: true, expires_in_minutes: TTL_MS / 60000, ...dev };
   } catch (e) {
-    return { sent: false, error: e.message, ...dev };
+    console.error('[verify] send failed:', e.meta?.code ?? '', e.message);
+    return { sent: false, error: [e.meta?.code, e.message].filter(Boolean).join(' '), ...dev };
   }
 }
 
